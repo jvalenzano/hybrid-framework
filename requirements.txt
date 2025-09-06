@@ -1,0 +1,89 @@
+# Core Dependencies
+agno>=2.0.0
+agent-os-sdk>=1.5.0
+
+# Python Core
+python-dotenv>=1.0.0
+pydantic>=2.0.0
+typing-extensions>=4.5.0
+
+# Async Support
+asyncio>=3.4.3
+aiohttp>=3.8.0
+aiodns>=3.0.0
+
+# LLM Integration
+openai>=1.0.0
+anthropic>=0.5.0
+langchain>=0.1.0
+langchain-community>=0.0.10
+langgraph>=0.0.20
+
+# Data Processing
+pandas>=2.0.0
+numpy>=1.24.0
+scikit-learn>=1.3.0
+
+# API Frameworks
+fastapi>=0.100.0
+uvicorn>=0.23.0
+pydantic>=2.0.0
+
+# Message Queue
+aiokafka>=0.8.0
+redis>=5.0.0
+celery>=5.3.0
+
+# Database
+sqlalchemy>=2.0.0
+asyncpg>=0.28.0
+pymongo>=4.4.0
+
+# Monitoring & Observability
+prometheus-client>=0.17.0
+opentelemetry-api>=1.20.0
+opentelemetry-sdk>=1.20.0
+opentelemetry-instrumentation-fastapi>=0.40b0
+jaeger-client>=4.8.0
+
+# Testing
+pytest>=7.4.0
+pytest-asyncio>=0.21.0
+pytest-cov>=4.1.0
+pytest-mock>=3.11.0
+locust>=2.15.0
+
+# Code Quality
+black>=23.0.0
+ruff>=0.1.0
+mypy>=1.5.0
+pre-commit>=3.3.0
+
+# Documentation
+mkdocs>=1.5.0
+mkdocs-material>=9.0.0
+mkdocstrings>=0.22.0
+
+# Utilities
+python-json-logger>=2.0.0
+tenacity>=8.2.0
+cachetools>=5.3.0
+httpx>=0.24.0
+
+# Security
+cryptography>=41.0.0
+pyjwt>=2.8.0
+python-jose>=3.3.0
+
+# Development Tools
+ipython>=8.14.0
+jupyter>=1.0.0
+notebook>=7.0.0
+
+# Optional: Advanced Features
+# Uncomment as needed
+# transformers>=4.30.0  # For custom LLM models
+# torch>=2.0.0  # For ML models
+# tensorflow>=2.13.0  # Alternative to PyTorch
+# ray>=2.6.0  # For distributed computing
+# dask>=2023.7.0  # For parallel computing

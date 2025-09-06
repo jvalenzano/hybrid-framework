@@ -1,0 +1,380 @@
+# Agent OS Configuration
+# Production deployment configuration for the hybrid framework
+# This file defines how your Agno prototype gets deployed to Agent OS
+
+apiVersion: agent-os/v1
+kind: AgentDeployment
+metadata:
+  name: intelligent-agent-prod
+  namespace: production
+  labels:
+    framework: hybrid
+    version: v1.0.0
+    team: ai-engineering
+
+spec:
+  # Agent definition
+  agent:
+    source:
+      type: python
+      path: ./agno-prototype.py
+      className: IntelligentAgent
+    
+    # Resource requirements
+    resources:
+      requests:
+        memory: "512Mi"
+        cpu: "500m"
+      limits:
+        memory: "2Gi"
+        cpu: "2000m"
+    
+    # Environment variables
+    env:
+      - name: ENVIRONMENT
+        value: production
+      - name: LOG_LEVEL
+        value: INFO
+      - name: ENABLE_METRICS
+        value: "true"
+      - name: ENABLE_TRACING
+        value: "true"
+    
+    # Agent capabilities
+    capabilities:
+      - natural_language_processing
+      - multi_step_reasoning
+      - tool_orchestration
+      - continuous_learning
+  
+  # Scaling configuration
+  scaling:
+    enabled: true
+    minReplicas: 2
+    maxReplicas: 100
+    targetMetrics:
+      - type: ResponseTime
+        targetValue: 2000  # milliseconds
+      - type: CPU
+        targetValue: 70    # percentage
+      - type: QueueDepth
+        targetValue: 50    # messages
+    
+    # Advanced scaling policies
+    behavior:
+      scaleUp:
+        stabilizationWindowSeconds: 60
+        selectPolicy: Max
+        policies:
+          - type: Percent
+            value: 100  # Double instances
+            periodSeconds: 60
+          - type: Pods
+            value: 5    # Add 5 pods max
+            periodSeconds: 60
+      scaleDown:
+        stabilizationWindowSeconds: 300
+        selectPolicy: Min
+        policies:
+          - type: Percent
+            value: 50   # Halve instances
+            periodSeconds: 120
+  
+  # Monitoring configuration
+  monitoring:
+    enabled: true
+    
+    # Metrics to track
+    metrics:
+      - name: response_time
+        type: histogram
+        buckets: [0.1, 0.5, 1.0, 2.0, 5.0]
+      - name: success_rate
+        type: gauge
+      - name: messages_processed
+        type: counter
+      - name: tool_usage
+        type: counter
+        labels: [tool_name]
+    
+    # Alerting rules
+    alerts:
+      - name: HighResponseTime
+        condition: response_time_p95 > 3000
+        duration: 5m
+        severity: warning
+        annotations:
+          summary: "Agent response time is degraded"
+          description: "95th percentile response time > 3s for 5 minutes"
+      
+      - name: LowSuccessRate
+        condition: success_rate < 0.90
+        duration: 2m
+        severity: critical
+        annotations:
+          summary: "Agent success rate below threshold"
+          description: "Success rate < 90% for 2 minutes"
+      
+      - name: HighErrorRate
+        condition: rate(errors[5m]) > 10
+        duration: 1m
+        severity: critical
+        annotations:
+          summary: "High error rate detected"
+          description: "More than 10 errors per 5 minutes"
+    
+    # Dashboard configuration
+    dashboards:
+      - name: agent-overview
+        panels:
+          - title: "Response Time (p50, p95, p99)"
+            type: graph
+            metrics: [response_time]
+          - title: "Success Rate"
+            type: gauge
+            metrics: [success_rate]
+          - title: "Messages/sec"
+            type: graph
+            metrics: [rate(messages_processed[1m])]
+          - title: "Tool Usage"
+            type: heatmap
+            metrics: [tool_usage]
+  
+  # Integration configuration
+  integrations:
+    # Message queue integration
+    messageQueue:
+      type: kafka
+      config:
+        brokers:
+          - kafka-broker-1:9092
+          - kafka-broker-2:9092
+        topic: agent-messages
+        consumerGroup: intelligent-agent-group
+        maxBatchSize: 100
+        maxWaitTime: 1000  # ms
+    
+    # Database integration
+    database:
+      type: postgresql
+      config:
+        host: postgres.database.svc.cluster.local
+        port: 5432
+        database: agent_data
+        sslMode: require
+        connectionPool:
+          min: 5
+          max: 20
+    
+    # Cache integration
+    cache:
+      type: redis
+      config:
+        host: redis.cache.svc.cluster.local
+        port: 6379
+        ttl: 3600  # seconds
+        maxMemory: 1gb
+    
+    # External APIs
+    externalServices:
+      - name: llm-provider
+        type: openai
+        endpoint: https://api.openai.com/v1
+        timeout: 30000  # ms
+        retries: 3
+        rateLimit:
+          requests: 1000
+          window: 60  # seconds
+      
+      - name: vector-database
+        type: pinecone
+        endpoint: https://api.pinecone.io
+        timeout: 10000  # ms
+  
+  # Security configuration
+  security:
+    # Authentication
+    authentication:
+      enabled: true
+      type: jwt
+      issuer: https://auth.agent-os.com
+      audience: intelligent-agent
+    
+    # Authorization
+    authorization:
+      enabled: true
+      policies:
+        - name: allow-read
+          effect: allow
+          actions: [read]
+          resources: ["*"]
+        - name: allow-write
+          effect: allow
+          actions: [write]
+          resources: ["agent-data/*"]
+          conditions:
+            - type: role
+              values: [admin, operator]
+    
+    # Encryption
+    encryption:
+      inTransit: true
+      atRest: true
+      keyManagement:
+        type: kms
+        provider: aws
+        keyId: alias/agent-encryption-key
+    
+    # Rate limiting
+    rateLimiting:
+      enabled: true
+      rules:
+        - name: global
+          limit: 10000
+          window: 60  # seconds
+        - name: per-user
+          limit: 100
+          window: 60  # seconds
+          keyBy: user_id
+  
+  # Deployment strategy
+  deployment:
+    strategy: RollingUpdate
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 0
+    
+    # Health checks
+    healthChecks:
+      readiness:
+        httpGet:
+          path: /health/ready
+          port: 8080
+        initialDelaySeconds: 10
+        periodSeconds: 5
+        timeoutSeconds: 3
+        successThreshold: 1
+        failureThreshold: 3
+      
+      liveness:
+        httpGet:
+          path: /health/live
+          port: 8080
+        initialDelaySeconds: 30
+        periodSeconds: 10
+        timeoutSeconds: 5
+        failureThreshold: 3
+    
+    # Canary deployment
+    canary:
+      enabled: false
+      steps:
+        - weight: 10
+          duration: 10m
+        - weight: 25
+          duration: 10m
+        - weight: 50
+          duration: 10m
+        - weight: 100
+      analysis:
+        metrics:
+          - name: success-rate
+            threshold: 0.95
+          - name: response-time-p99
+            threshold: 3000
+        rollbackOnFailure: true
+  
+  # Lifecycle hooks
+  lifecycle:
+    preStart:
+      exec:
+        command: ["python", "-c", "import warmup; warmup.prepare()"]
+    
+    preStop:
+      exec:
+        command: ["python", "-c", "import graceful; graceful.shutdown()"]
+      gracePeriod: 30  # seconds
+  
+  # Observability
+  observability:
+    # Logging
+    logging:
+      level: INFO
+      format: json
+      outputs:
+        - type: stdout
+        - type: file
+          path: /var/log/agent/agent.log
+          maxSize: 100Mi
+          maxBackups: 10
+        - type: elasticsearch
+          endpoint: https://logs.elastic.svc.cluster.local:9200
+          index: agent-logs
+    
+    # Tracing
+    tracing:
+      enabled: true
+      provider: jaeger
+      endpoint: http://jaeger-collector:14268/api/traces
+      samplingRate: 0.1  # 10% of requests
+    
+    # Profiling
+    profiling:
+      enabled: false
+      provider: pyroscope
+      endpoint: http://pyroscope:4040
+      sampleRate: 100  # Hz
+
+# Testing configuration (for staging/dev)
+testing:
+  # A/B testing
+  experiments:
+    - name: new-parsing-algorithm
+      enabled: true
+      percentage: 10
+      metrics:
+        - response_time
+        - success_rate
+    
+    - name: enhanced-context-window
+      enabled: false
+      percentage: 5
+      metrics:
+        - accuracy
+        - memory_usage
+  
+  # Chaos engineering
+  chaos:
+    enabled: false
+    experiments:
+      - type: latency
+        target: network
+        value: 100ms
+        probability: 0.1
+      
+      - type: cpu-stress
+        target: pod
+        value: 50%
+        duration: 30s
+        probability: 0.05
+
+# Backup and recovery
+backup:
+  enabled: true
+  schedule: "0 2 * * *"  # Daily at 2 AM
+  retention: 30  # days
+  storage:
+    type: s3
+    bucket: agent-backups
+    region: us-west-2
+    encryption: true
+
+# Maintenance windows
+maintenance:
+  windows:
+    - name: weekly-update
+      schedule: "0 3 * * 0"  # Sunday 3 AM
+      duration: 2h
+      notifications:
+        slack: "#agent-ops"
+        email: ops-team@example.com
