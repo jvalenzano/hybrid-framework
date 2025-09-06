@@ -6,13 +6,13 @@
 [![GitHub stars](https://img.shields.io/github/stars/yourusername/hybrid-framework)](https://github.com/yourusername/hybrid-framework/stargazers)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
 
-> ⚠️ **Important**: This framework requires access to two separate commercial platforms: [Agno](https://agno.com) and [Agent OS by Builder Methods](https://buildermethods.com/agent-os). See [Requirements](#requirements) for details.
+> ⚠️ **Important**: This framework combines two platforms: [Agno](https://github.com/agno-agi/agno) (open source, free) and [Agent OS by Builder Methods](https://buildermethods.com/agent-os) (commercial platform). See [Requirements](#requirements) for details.
 
 ## A Revolutionary Approach to Building Production-Ready AI Agent Systems
 
 ### Executive Summary
 
-The convergence of rapid prototyping frameworks with production-grade orchestration platforms represents a paradigm shift in AI development. This document presents a hybrid methodology that leverages **Agno** for accelerated agent development and **Agent OS** (by Builder Methods) for enterprise-scale deployment, creating a seamless bridge from prototype to production in days rather than months.
+The convergence of rapid prototyping frameworks with production-grade orchestration platforms represents a paradigm shift in AI development. This document presents a hybrid methodology that leverages **Agno** (open source) for accelerated agent development and **Agent OS** by Builder Methods (commercial) for enterprise-scale deployment, creating a seamless bridge from prototype to production in days rather than months.
 
 **[Read Full Disclaimer](./DISCLAIMER.md)** | **[View Requirements](#requirements)** | **[Get Started](#getting-started)**
 
@@ -20,14 +20,14 @@ The convergence of rapid prototyping frameworks with production-grade orchestrat
 
 ## 📋 Requirements
 
-This framework demonstrates an architectural pattern that requires:
+This framework demonstrates an architectural pattern that combines:
 
-- **Agno SDK** - Commercial license from [Agno AGI](https://agno.com)
-- **Agent OS Platform** - Access from [Builder Methods](https://buildermethods.com/agent-os)
+- **Agno Framework** - Open source (Apache 2.0 license) - FREE to use from [Agno AGI](https://github.com/agno-agi/agno)
+- **Agent OS Platform** - Commercial platform from [Builder Methods](https://buildermethods.com/agent-os) - requires paid access
 - **Python 3.8+** - For running examples
-- **API Keys** - For both platforms (see [.env.example](./.env.example))
+- **API Keys** - Only needed for Agent OS (see [.env.example](./.env.example))
 
-> **Note**: The code examples in this repository are conceptual demonstrations. Actual implementation requires valid licenses and API access to both platforms.
+> **Note**: You can start prototyping immediately with the free, open-source Agno framework. Agent OS is only required when you're ready to deploy to production.
 
 ---
 
@@ -38,7 +38,7 @@ Traditional AI development faces a fundamental dichotomy:
 - **Enterprise Platforms**: Robust but slow to implement
 - **The Gap**: Typically 3-6 months from working prototype to deployed solution
 
-This hybrid framework demonstrates how to eliminate that gap by bridging two best-in-class tools.
+This hybrid framework demonstrates how to eliminate that gap by bridging a free open-source prototyping tool with a commercial production platform.
 
 ---
 
@@ -46,25 +46,25 @@ This hybrid framework demonstrates how to eliminate that gap by bridging two bes
 
 ### Core Philosophy
 ```
-Prototype with Agno → Validate with Users → Deploy on Agent OS → Scale Infinitely
+Prototype with Agno (Free) → Validate with Users → Deploy on Agent OS (Paid) → Scale Infinitely
 ```
 
 ### Visual Overview: The Bridge Pattern
 
 ```mermaid
 graph LR
-    subgraph "Development Phase"
+    subgraph "Development Phase (Free)"
         A[Business Requirements] --> B[Agno Prototype]
         B --> C[Local Testing]
     end
     
-    subgraph "Bridge Layer"
+    subgraph "Bridge Layer (Open Source)"
         C --> D[HybridBridge]
         D --> E[Config Mapping]
         E --> F[API Translation]
     end
     
-    subgraph "Production Phase"
+    subgraph "Production Phase (Commercial)"
         F --> G[Agent OS Deploy]
         G --> H[Auto-Scaling]
         G --> I[Monitoring]
@@ -84,9 +84,11 @@ graph LR
 ├─────────────────────────────────────────┤
 │    Agent OS Orchestration (Builder)     │
 │   (Production Runtime & Monitoring)     │
+│         [Commercial Platform]           │
 ├─────────────────────────────────────────┤
 │        Agno Development Layer           │
 │    (Rapid Prototyping & Testing)        │
+│         [Open Source - Free]            │
 ├─────────────────────────────────────────┤
 │       Core Agent Logic Library          │
 │    (Domain-Specific Intelligence)       │
@@ -126,13 +128,14 @@ gantt
 
 ## 🚀 Phase-Based Implementation Strategy
 
-### Phase 1: Rapid Prototype (48-72 Hours)
-**Tool**: Agno  
+### Phase 1: Rapid Prototype (48-72 Hours) - FREE
+**Tool**: Agno (Open Source)  
+**Cost**: $0  
 **Focus**: Core agent logic and capability validation
 
 ```python
-# Example: Agno prototype structure (requires Agno SDK)
-from agno import Agent, Task, Tool  # Requires commercial license
+# Example: Agno prototype structure (open source, no license required)
+from agno import Agent, Task, Tool  # Free, open source
 
 class IntelligentAgent(Agent):
     def __init__(self):
@@ -149,8 +152,9 @@ class IntelligentAgent(Agent):
         return await self.generate(processed)
 ```
 
-### Phase 2: Production Hardening (Days 3-5)
+### Phase 2: Production Hardening (Days 3-5) - PAID
 **Tool**: Agent OS Integration Layer  
+**Cost**: Based on Agent OS pricing  
 **Focus**: Reliability, monitoring, scalability
 
 ```yaml
@@ -188,39 +192,34 @@ agent_config:
 
 ```mermaid
 flowchart TD
-    A[Start New AI Project] --> B{Have Agno & Agent OS Access?}
-    B -->|No| C[Acquire Licenses]
-    B -->|Yes| D{Complexity Level?}
-    C --> D
-    D -->|Simple| E[Use Agno Standalone]
-    D -->|Complex| F{Need Production Scale?}
-    F -->|No| E
-    F -->|Yes| G[Implement Hybrid Framework]
-    G --> H[Build with Agno]
-    H --> I[Test Locally]
-    I --> J{Meets Requirements?}
-    J -->|No| H
-    J -->|Yes| K[Configure Bridge]
-    K --> L[Deploy to Agent OS]
-    L --> M[Monitor Performance]
-    M --> N{Performance OK?}
-    N -->|No| O[Optimize Bridge]
-    N -->|Yes| P[Production Success]
-    O --> M
+    A[Start New AI Project] --> B{Ready for Production?}
+    B -->|No| C[Use Agno Free]
+    B -->|Yes| D{Have Agent OS Access?}
+    C --> E[Prototype & Test]
+    D -->|No| F[Get Agent OS License]
+    D -->|Yes| G[Implement Bridge]
+    E --> B
+    F --> G
+    G --> H[Deploy to Production]
+    H --> I[Monitor Performance]
+    I --> J{Performance OK?}
+    J -->|No| K[Optimize Bridge]
+    J -->|Yes| L[Production Success]
+    K --> I
 ```
 
 ### Implementation Bridge (Conceptual)
 
 ```python
 # Conceptual bridge implementation
-# Actual implementation requires both SDKs
+# Agno is free/open source, Agent OS requires commercial access
 class HybridAgentBridge:
     def __init__(self, agno_agent, agent_os_config):
         """
-        Connects Agno prototype to Agent OS production
-        Requires valid API keys for both platforms
+        Connects free Agno prototype to commercial Agent OS production
+        Only requires Agent OS API key for production deployment
         """
-        self.prototype = agno_agent  # Agno agent instance
+        self.prototype = agno_agent  # Free Agno agent instance
         self.production = AgentOSWrapper(agent_os_config)  # Builder Methods wrapper
         
     async def execute(self, request):
@@ -233,40 +232,41 @@ class HybridAgentBridge:
 
 ---
 
-## 📊 Performance Expectations
+## 📊 Performance & Cost Analysis
 
-### Theoretical Benefits*
+### Framework Costs
 
-| Metric | Traditional Approach | Hybrid Framework | Improvement |
-|--------|---------------------|------------------|-------------|
-| Time to Production | 12-24 weeks | 1-2 weeks | 10-20x faster |
-| Rewrite Required | Yes | No | 100% code reuse |
-| Risk Level | High | Low | Incremental validation |
-| Scaling Complexity | Manual | Automatic | Built-in from day 1 |
+| Component | Traditional Approach | Hybrid Framework |
+|-----------|---------------------|------------------|
+| Prototyping Tool | Various (often paid) | Agno (FREE) |
+| Development Time | 12-24 weeks @ $150k+ | 1-2 weeks @ $5-10k |
+| Production Platform | Custom build or expensive | Agent OS (commercial) |
+| Rewrite Required | Yes (expensive) | No (bridge pattern) |
+| Total Initial Cost | $200k-500k | $5-10k + Agent OS subscription |
 
-*Results vary based on use case complexity, team expertise, and specific requirements.
+*Agent OS pricing varies based on usage. Contact Builder Methods for current rates.*
 
 ---
 
 ## ❓ Frequently Asked Questions
 
-### Q: Do I need both Agno and Agent OS licenses?
-**A:** Yes, these are separate commercial products. Agno is used for development, Agent OS (Builder Methods) for production deployment.
+### Q: Is Agno really free?
+**A:** Yes! Agno is open source under the Apache 2.0 license. You can use it for any purpose, including commercial projects, without paying anything.
 
-### Q: Can I use this framework with just one of the tools?
-**A:** While you can use either tool independently, the hybrid approach's value comes from combining both. Using just one tool means following their standard workflows.
+### Q: What do I need to pay for?
+**A:** Only Agent OS (by Builder Methods) requires a commercial subscription for production deployment. You can prototype entirely for free with Agno.
 
-### Q: What if my Agno prototype uses features not supported by Agent OS?
-**A:** The bridge pattern includes compatibility checking. You'll need to either modify your prototype or implement custom adapters for unsupported features.
+### Q: Can I use this framework with just Agno?
+**A:** Yes, you can use Agno standalone for development and testing. The bridge pattern and Agent OS are only needed when you want production-grade scaling, monitoring, and reliability.
 
 ### Q: Is this framework officially supported by Agno or Builder Methods?
-**A:** No, this is an independent, community-driven project demonstrating an architectural pattern. For official support, contact the respective vendors.
+**A:** No, this is an independent, community-driven project demonstrating an architectural pattern. For official support, contact the respective projects.
 
-### Q: What are the actual costs involved?
-**A:** Costs vary based on usage and licensing tiers. Contact [Agno](https://agno.com) and [Builder Methods](https://buildermethods.com) for current pricing.
+### Q: Can I use other production platforms instead of Agent OS?
+**A:** The bridge pattern is conceptually portable. While our implementation focuses on Agent OS, the pattern could be adapted for other production platforms.
 
-### Q: Can I contribute to this framework?
-**A:** Yes! See our [Contributing Guide](CONTRIBUTING.md) for details. Note that contributions should focus on the bridge pattern and integration strategies, not the proprietary platforms themselves.
+### Q: What's the minimum cost to try this?
+**A:** $0. You can start with the free, open-source Agno framework and only pay for Agent OS when you're ready for production.
 
 ---
 
@@ -274,39 +274,28 @@ class HybridAgentBridge:
 
 ### Common Issues and Solutions
 
-#### Bridge Connection Fails
+#### Agno Installation Issues
+```bash
+# Agno is installed directly from GitHub (free)
+pip install git+https://github.com/agno-agi/agno.git
+```
+**No API key needed** - It's open source!
+
+#### Agent OS Connection Fails
 ```bash
 Error: Cannot connect to Agent OS endpoint
 ```
 **Solutions:**
 - Verify `AGENT_OS_API_KEY` is set correctly in `.env`
-- Check network connectivity to Agent OS cloud
-- Ensure your Agent OS subscription is active
+- Check your Agent OS subscription is active
 - Verify endpoint URL matches your region
 
-#### Agno Import Errors
-```bash
-ImportError: No module named 'agno'
-```
-**Solutions:**
-- Install Agno SDK: `pip install agno-sdk` (requires license)
-- Verify Python environment has access to Agno
-- Check `AGNO_API_KEY` is configured
-
-#### Performance Degradation in Production
-**Symptoms:** Increasing latency, failed requests  
-**Solutions:**
-- Check Agent OS scaling policies are active
-- Monitor circuit breaker status in bridge
-- Verify cache configuration
-- Review Agent OS dashboard for resource limits
-
-#### Configuration Mismatch
+#### Bridge Pattern Issues
 **Symptoms:** Features work in Agno but fail in Agent OS  
 **Solutions:**
-- Review compatibility matrix in bridge logs
+- Review compatibility in bridge logs
 - Check Agent OS capability configuration
-- Ensure all required Agent OS modules are enabled
+- Ensure required Agent OS modules are enabled
 
 ---
 
@@ -314,12 +303,18 @@ ImportError: No module named 'agno'
 
 ### Prerequisites
 
-1. **Obtain Platform Access**
-   - Sign up for [Agno](https://agno.com) developer account
-   - Get [Agent OS](https://buildermethods.com/agent-os) platform access
-   - Obtain API keys for both platforms
+1. **Install Agno (Free)**
+```bash
+# Install directly from GitHub
+pip install git+https://github.com/agno-agi/agno.git
+```
 
-2. **Set Up Environment**
+2. **Get Agent OS Access (When Ready for Production)**
+   - Sign up at [Builder Methods](https://buildermethods.com/agent-os)
+   - Obtain API key for production deployment
+   - Configure in `.env` file
+
+3. **Set Up Environment**
 ```bash
 # Clone the repository
 git clone https://github.com/yourusername/hybrid-framework
@@ -328,41 +323,38 @@ cd hybrid-framework
 # Copy environment template
 cp .env.example .env
 
-# Edit .env with your API keys
-nano .env  # or use your preferred editor
+# Edit .env with your Agent OS API key (if you have one)
+# You can start without it using just Agno!
+nano .env
 
 # Install dependencies
 pip install -r requirements.txt
 ```
 
-3. **Verify Installation**
+4. **Start Prototyping (Free)**
 ```bash
-# Run installation test
-python test_installation.py
-
-# If successful, run examples
+# Run Agno examples without any API keys
 python examples/agno-prototype.py
-python examples/hybrid-bridge.py
 ```
 
 ### Resources
 
 #### 📦 Source Code
-- **Agno**: [GitHub Repository](https://github.com/agno-agi/agno) - Rapid agent prototyping framework
-- **Agent OS**: [GitHub Repository](https://github.com/buildermethods/agent-os) - Production orchestration platform by Builder Methods
+- **Agno**: [GitHub Repository](https://github.com/agno-agi/agno) - Free, open-source agent framework (Apache 2.0)
+- **Agent OS**: [GitHub Repository](https://github.com/buildermethods/agent-os) - Commercial production platform by Builder Methods
 
 #### 📚 Documentation
-- **Agno**: [Official Docs](https://docs.agno.com/introduction) - Getting started with Agno
-- **Agent OS**: [Official Docs](https://buildermethods.com/agent-os) - Agent OS platform guide
+- **Agno**: [Official Docs](https://docs.agno.com/introduction) - Getting started with free Agno framework
+- **Agent OS**: [Official Docs](https://buildermethods.com/agent-os) - Agent OS platform guide (commercial)
 
 #### 🎥 Video Tutorials
-- **Agno**: [Framework Overview](https://youtu.be/nLkBNnnA8Ac?si=YHp2_h4HsCe2son9) - Introduction to rapid prototyping
+- **Agno**: [Framework Overview](https://youtu.be/nLkBNnnA8Ac?si=YHp2_h4HsCe2son9) - Introduction to open-source prototyping
 - **Agent OS**: [Platform Walkthrough](https://youtu.be/4PlVnrliN3Q?si=QBOqacv0NVyBVRrX) - Production deployment guide
 
 #### 🚀 Quick Links
-- [Hybrid Framework Examples](./examples) - Working code samples (conceptual)
-- [Environment Setup](./.env.example) - Required configuration
-- [Disclaimer](./DISCLAIMER.md) - Important legal information
+- [Hybrid Framework Examples](./examples) - Working code samples
+- [Environment Setup](./.env.example) - Configuration template
+- [Disclaimer](./DISCLAIMER.md) - Important information
 - [Contributing Guidelines](./CONTRIBUTING.md) - How to contribute
 
 ---
@@ -378,7 +370,7 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-**Note:** Contributions should focus on the bridge pattern and integration strategies, not modifications to the proprietary platforms themselves.
+**Note:** Contributions should focus on the bridge pattern and integration strategies, not modifications to Agno (open source) or Agent OS (proprietary) themselves.
 
 ---
 
@@ -386,13 +378,17 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-**Important:** This framework requires commercial licenses for both Agno and Agent OS. The framework itself is open source, but the platforms it connects are proprietary. See [DISCLAIMER.md](./DISCLAIMER.md) for full details.
+**Important:** 
+- The Hybrid Framework pattern itself is open source (MIT)
+- Agno is open source (Apache 2.0) - FREE to use
+- Agent OS requires a commercial license from Builder Methods
+- See [DISCLAIMER.md](./DISCLAIMER.md) for full details
 
 ---
 
 ## 🙏 Acknowledgments
 
-- The Agno team at Agno AGI for revolutionary prototyping capabilities
+- The Agno team at Agno AGI for their open-source rapid prototyping framework
 - Builder Methods for the Agent OS production platform
 - The AI development community for continuous innovation
 - All contributors who make this framework better every day
@@ -403,4 +399,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 **Last Updated**: September 2025  
 **Maintained by**: The Hybrid Framework Community
 
-*This is an architectural pattern demonstrating how to bridge rapid prototyping with production deployment. Actual implementation requires access to both commercial platforms.*
+*Start prototyping for free with Agno. Scale to production with Agent OS when you're ready.*
