@@ -3,7 +3,7 @@
 
 > **Purpose**: This is your single source of truth for working with Agent OS. Start here, always.  
 > **Location**: Save as `AGENT_OS_WORKFLOW_GUIDE.md` in your project root  
-> **Version**: 1.1.0 | Updated: September 2025 - Added AI Agent Management Section
+> **Version**: 1.2.0 | Updated: September 2025 - Added AI Agent Management & Folder Organization
 
 ---
 
@@ -200,10 +200,27 @@ Please analyze current state and recommend next actions.
 
 ## 📋 Command Reference
 
+### Command Execution Order
+
+```mermaid
+graph LR
+    A[/plan-product] -->|First time only| B[/create-spec]
+    B --> C[/create-tasks]
+    C --> D[/execute-tasks]
+    D --> E[Create Recap]
+    E -->|Next feature| B
+    
+    F[/analyze-product] -->|Review state| B
+    
+    style A fill:#e1f5e1
+    style B fill:#fff3e1
+    style C fill:#fff3e1
+    style D fill:#fff3e1
+```
+
 ### Core Commands
 
 | Command | Purpose | Creates | Example |
-|---------|---------|---------|---------|
 | `/plan-product` | Initialize new project | mission.md, roadmap.md, tech-stack.md | `/plan-product "AI-powered CRM"` |
 | `/analyze-product` | Review existing project | Analysis summary | `/analyze-product` |
 | `/create-spec` | Define new feature | Spec folder with spec.md, sub-specs/ | `/create-spec "User authentication"` |
@@ -538,22 +555,41 @@ echo "🎯 Next Roadmap Items:"
 grep -A 2 "\[ \]" .agent-os/product/roadmap.md | head -10
 ```
 
-### Understanding Spec Structure
+### Understanding Agent OS Folder Organization
 
+#### Spec Structure
 ```
-.agent-os/specs/
-├── 2025-09-13-feature-name/    ✅ Correct format
-│   ├── spec.md                 # Main specification
-│   ├── spec-lite.md            # Condensed version
-│   ├── tasks.md                # Implementation checklist
-│   ├── sub-specs/              # Technical details
-│   │   ├── technical-spec.md
-│   │   ├── database-schema.md
-│   │   └── api-spec.md
-│   └── amendments/             # Changes/updates
+.agent-os/
+├── product/                    # Product-level documentation
+│   ├── mission.md             # Product vision and purpose
+│   ├── roadmap.md             # High-level phases and features
+│   ├── tech-stack.md          # Technology choices
+│   └── phase-planning-docs.md # Planning references (NOT specs)
 │
-└── loose-file.md               ❌ Wrong - avoid this!
+├── specs/                      # Feature specifications
+│   ├── 2025-09-13-feature-name/    ✅ Correct format
+│   │   ├── spec.md                 # Main specification
+│   │   ├── spec-lite.md            # Condensed version
+│   │   ├── tasks.md                # Implementation checklist
+│   │   ├── sub-specs/              # Technical details
+│   │   │   ├── technical-spec.md
+│   │   │   ├── database-schema.md
+│   │   │   └── api-spec.md
+│   │   └── amendments/             # Changes/updates
+│   │
+│   └── loose-file.md               ❌ Wrong - avoid this!
+│
+└── recaps/                     # Completion documentation
+    └── feature-complete.md    # Created after implementation
 ```
+
+#### Critical Folder Rules
+
+| **Folder** | **Purpose** | **What Goes Here** | **What DOESN'T Go Here** |
+|------------|-------------|-------------------|------------------------|
+| `/product/` | Product strategy | Mission, roadmap, planning docs | Executable specs, tasks |
+| `/specs/` | Feature implementation | Dated spec folders ONLY | Planning docs, loose files |
+| `/recaps/` | Completion records | Post-implementation summaries | Active task tracking |
 
 ---
 
@@ -620,16 +656,22 @@ grep -A 2 "\[ \]" .agent-os/product/roadmap.md | head -10
 5. **Regular Recaps**: After each major feature
 6. **Check Roadmap**: Stay aligned with product vision
 7. **Small Specs**: 3-5 day implementations, not month-long epics
+8. **Use /create-spec FIRST**: Always create spec before ANY implementation
+9. **Keep Planning Docs in /product/**: Phase plans go in product folder, NOT specs
+10. **Note Retroactive Specs**: If creating spec after implementation, document it
 
 ### ❌ DON'T DO THIS
 
-1. **Skip Specs**: Never jump straight to coding
+1. **Skip Specs**: Never jump straight to coding without /create-spec
 2. **Bulk Specs**: Don't create all specs upfront
 3. **Ignore Tasks**: Don't freestyle implement
 4. **Forget Recaps**: Always document what was built
 5. **Break Structure**: Keep spec folder format consistent
 6. **Mix Phases**: Complete Phase 1 before Phase 2
 7. **Hoard Context**: Give AI full project context
+8. **Mix Planning and Specs**: Never put phase planning docs in /specs/
+9. **Create Loose Files**: Every spec needs its dated folder
+10. **Skip Workflow**: Don't go directly from idea to code
 
 ---
 
