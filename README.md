@@ -18,6 +18,14 @@ The convergence of rapid prototyping frameworks with production-grade orchestrat
 
 ---
 
+## 🎯 **NEW DEVELOPERS: START HERE FIRST**
+
+> **📚 [Agent OS Workflow Guide](docs/AGENT-OS-WORKFLOW-GUIDE.md)** - Your complete developer playbook
+>
+> This comprehensive guide is the **single source of truth** for AI-driven development. Whether you're new to Agent OS or returning to a project, this guide covers everything from quick start checklists to advanced troubleshooting.
+
+---
+
 ## 📋 Requirements
 
 This framework demonstrates an architectural pattern that combines:
@@ -57,20 +65,20 @@ graph LR
         A[Business Requirements] --> B[Agno Prototype]
         B --> C[Local Testing]
     end
-    
+
     subgraph "Bridge Layer (Open Source)"
         C --> D[HybridBridge]
         D --> E[Config Mapping]
         E --> F[API Translation]
     end
-    
+
     subgraph "Production Phase (Commercial)"
         F --> G[Agent OS Deploy]
         G --> H[Auto-Scaling]
         G --> I[Monitoring]
         G --> J[Load Balancing]
     end
-    
+
     style D fill:#f96,stroke:#333,stroke-width:4px
     style E fill:#f96,stroke:#333,stroke-width:4px
 ```
@@ -114,7 +122,7 @@ gantt
     Testing             :trad3, after trad2, 30d
     Deployment          :trad4, after trad3, 30d
     Debugging           :crit, trad5, after trad4, 30d
-    
+
     section Hybrid
     Agno Prototype      :done, hyb1, 2024-01-01, 3d
     Bridge Setup        :active, hyb2, after hyb1, 1d
@@ -129,8 +137,8 @@ gantt
 ## 🚀 Phase-Based Implementation Strategy
 
 ### Phase 1: Rapid Prototype (48-72 Hours) - FREE
-**Tool**: Agno (Open Source)  
-**Cost**: $0  
+**Tool**: Agno (Open Source)
+**Cost**: $0
 **Focus**: Core agent logic and capability validation
 
 ```python
@@ -144,7 +152,7 @@ class IntelligentAgent(Agent):
             ProcessTool(),    # Core business logic
             GenerateTool()    # Output generation
         ]
-    
+
     async def execute(self, input_data: str) -> dict:
         # Parse → Process → Generate workflow
         parsed = await self.parse(input_data)
@@ -153,8 +161,8 @@ class IntelligentAgent(Agent):
 ```
 
 ### Phase 2: Production Hardening (Days 3-5) - PAID
-**Tool**: Agent OS Integration Layer  
-**Cost**: Based on Agent OS pricing  
+**Tool**: Agent OS Integration Layer
+**Cost**: Based on Agent OS pricing
 **Focus**: Reliability, monitoring, scalability
 
 ```yaml
@@ -162,17 +170,17 @@ class IntelligentAgent(Agent):
 agent_config:
   name: intelligent_agent_v1
   runtime: agent-os-2.0
-  
+
   capabilities:
     - natural_language_processing
     - multi-step_reasoning
     - tool_orchestration
-    
+
   monitoring:
     - latency_tracking
     - error_rates
     - success_metrics
-    
+
   scaling:
     auto_scale: true
     min_instances: 2
@@ -181,7 +189,7 @@ agent_config:
 ```
 
 ### Phase 3: Continuous Enhancement (Ongoing)
-**Tool**: Hybrid Development Environment  
+**Tool**: Hybrid Development Environment
 **Focus**: A/B testing, continuous learning, feature expansion
 
 ---
@@ -221,11 +229,11 @@ class HybridAgentBridge:
         """
         self.prototype = agno_agent  # Free Agno agent instance
         self.production = AgentOSWrapper(agent_os_config)  # Builder Methods wrapper
-        
+
     async def execute(self, request):
         # Use Agno logic with Agent OS infrastructure
         result = await self.prototype.process(request)
-        
+
         # Agent OS handles monitoring, scaling, reliability
         return await self.production.wrap_response(result)
 ```
@@ -291,11 +299,33 @@ Error: Cannot connect to Agent OS endpoint
 - Verify endpoint URL matches your region
 
 #### Bridge Pattern Issues
-**Symptoms:** Features work in Agno but fail in Agent OS  
+**Symptoms:** Features work in Agno but fail in Agent OS
 **Solutions:**
 - Review compatibility in bridge logs
 - Check Agent OS capability configuration
 - Ensure required Agent OS modules are enabled
+
+---
+
+## 📖 **THE DEVELOPER'S BIBLE: Agent OS Workflow Guide**
+
+> **🎯 START HERE FIRST** - This is your single source of truth for AI-driven development
+
+**[📚 Agent OS Workflow Guide](docs/AGENT-OS-WORKFLOW-GUIDE.md)** - The complete developer playbook that covers:
+
+- **Quick Start Checklist** - Get back into any project instantly
+- **Workflow Decision Matrix** - Know exactly what to do in every situation
+- **Context Prompts for Every Situation** - Perfect prompts for any development task
+- **Keeping AI Agents on Track** - Framework enforcement strategies
+- **Troubleshooting & Recovery** - Solutions for every common problem
+- **Best Practices & Anti-Patterns** - Learn from experience
+
+**This guide is essential for developers at ANY stage** - whether you're:
+- 🆕 **New to Agent OS** - Complete onboarding and setup
+- 🔄 **Returning to a project** - Quick context restoration
+- 🚀 **Building features** - Step-by-step implementation
+- 🐛 **Debugging issues** - Systematic problem solving
+- 📈 **Scaling to production** - Enterprise deployment strategies
 
 ---
 
@@ -337,13 +367,25 @@ pip install -r requirements.txt
 python examples/agno-prototype.py
 ```
 
+5. **📖 Read the Workflow Guide**
+```bash
+# Open the complete developer playbook
+open docs/AGENT-OS-WORKFLOW-GUIDE.md
+```
+
 ### Resources
+
+#### 📚 **Essential Documentation**
+- **🎯 [Agent OS Workflow Guide](docs/AGENT-OS-WORKFLOW-GUIDE.md)** - **START HERE** - Complete developer playbook
+- **📋 [Changelog](CHANGELOG.md)** - Track all enhancements and improvements
+- **🤝 [Contributing Guidelines](CONTRIBUTING.md)** - How to contribute to the project
+- **⚠️ [Disclaimer](DISCLAIMER.md)** - Important licensing and platform information
 
 #### 📦 Source Code
 - **Agno**: [GitHub Repository](https://github.com/agno-agi/agno) - Free, open-source agent framework (Apache 2.0)
 - **Agent OS**: [GitHub Repository](https://github.com/buildermethods/agent-os) - Commercial production platform by Builder Methods
 
-#### 📚 Documentation
+#### 📖 Platform Documentation
 - **Agno**: [Official Docs](https://docs.agno.com/introduction) - Getting started with free Agno framework
 - **Agent OS**: [Official Docs](https://buildermethods.com/agent-os) - Agent OS platform guide (commercial)
 
@@ -354,8 +396,7 @@ python examples/agno-prototype.py
 #### 🚀 Quick Links
 - [Hybrid Framework Examples](./examples) - Working code samples
 - [Environment Setup](./.env.example) - Configuration template
-- [Disclaimer](./DISCLAIMER.md) - Important information
-- [Contributing Guidelines](./CONTRIBUTING.md) - How to contribute
+- [Docker Setup](./docker-compose.yml) - Local development environment
 
 ---
 
@@ -378,7 +419,7 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-**Important:** 
+**Important:**
 - The Hybrid Framework pattern itself is open source (MIT)
 - Agno is open source (Apache 2.0) - FREE to use
 - Agent OS requires a commercial license from Builder Methods
@@ -395,8 +436,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-**Version**: 1.0.0  
-**Last Updated**: September 2025  
+**Version**: 1.0.0
+**Last Updated**: September 2025
 **Maintained by**: The Hybrid Framework Community
 
 *Start prototyping for free with Agno. Scale to production with Agent OS when you're ready.*
