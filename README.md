@@ -377,6 +377,7 @@ open docs/AGENT-OS-WORKFLOW-GUIDE.md
 
 #### 📚 **Essential Documentation**
 - **🎯 [Agent OS Workflow Guide](docs/AGENT-OS-WORKFLOW-GUIDE.md)** - **START HERE** - Complete developer playbook
+- **🗺️ [Roadmap](ROADMAP.md)** - Strategic development plan and future features
 - **📋 [Changelog](CHANGELOG.md)** - Track all enhancements and improvements
 - **🤝 [Contributing Guidelines](CONTRIBUTING.md)** - How to contribute to the project
 - **⚠️ [Disclaimer](DISCLAIMER.md)** - Important licensing and platform information
